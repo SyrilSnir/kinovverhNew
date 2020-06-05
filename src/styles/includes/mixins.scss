@@ -1,0 +1,13 @@
+
+
+@mixin lg-block(){
+    @media screen and (max-width: $break_lg){
+        @content;
+    }
+}
+
+@mixin sm-block(){
+    @media screen and (max-width: $break_sm){
+        @content;
+    }
+}
