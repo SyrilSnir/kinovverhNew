@@ -1,0 +1,47 @@
+#f-cat {
+    .f-cat-bg {
+        background: rgb(255,204,0) url(../img/cat_bg.svg);
+            background-size: auto;
+        background-size: cover;
+        height: 173px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        z-index: -1;
+    }
+    .f-btton {
+        width: 144px;
+        height: 144px;
+        background: url(../img/krug.svg) no-repeat center;
+        font: 75px 'pt_sansbold';
+        font-size: 75px;
+        line-height: normal;
+        text-align: center;
+        line-height: 153px;
+        vertical-align: middle;
+        cursor: pointer;
+        display: block;
+        color: #34303f;
+        margin: 0 auto;
+        &:hover {
+            color: #fff;
+            text-decoration: none;
+            background: url(../img/krug_hover.svg) no-repeat center;
+        }
+        span {
+            font-size: 48px;
+            line-height: 57px;
+            position: relative;
+            top: -23px;
+        }
+        &.f-btton__all {
+           font-size: 48px;
+            line-height: 140px;
+            span {
+                font-size: 18px;
+                display: block;
+                margin-top: -50px;
+            }
+        }
+    }
+}

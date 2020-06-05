@@ -1,0 +1,35 @@
+{
+    "name":"syrilsnir/kinovverh",
+    "description": "Онлайн кинозал компании ВВЕРХ",
+    "version": "0.0.0",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Konstantin Kotov",
+            "email": "kotov@nsod.ru",
+            "homepage": "https://github.com/SyrilSnir"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "^2.0",
+        "yiisoft/yii2-bootstrap": "^2.0",
+        "yiisoft/yii2-debug": "^2.1",
+        "dmstr/yii2-adminlte-asset": "^2.6",
+        "guzzlehttp/guzzle": "^6.3",
+        "mihaildev/yii2-ckeditor": "^1.0",
+        "kartik-v/yii2-widget-fileinput": "^1.0",
+        "yii-dream-team/yii2-upload-behavior": "*",
+        "2amigos/yii2-multi-select-widget": "*"
+    },
+    "autoload":{
+        "psr-4": {          
+            "app\\": "app"
+        }
+    },
+    "repositories": {
+        "packagist": {
+          "type": "composer",
+          "url": "https://packagist.phpcomposer.com"
+            }
+        }
+}

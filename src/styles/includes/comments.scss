@@ -1,0 +1,21 @@
+.film-commens {
+    padding: 20px 0;
+    &__title {
+        font-size: 24px;
+    }
+}
+#tab1 .film-commens {
+    margin-top: 50px;
+    border-top: 1px solid #999999;
+}
+form.film-commens__form .reviews-reply-field {
+    width: 100%;
+    border-radius: 30px;
+    border: 1px solid #999;
+    height: auto;
+    margin: 22px 0;
+    padding: 20px;
+    &:hover {
+        border: 2px solid #FFCC00;        
+    }
+}

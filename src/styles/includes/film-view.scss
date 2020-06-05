@@ -1,0 +1,51 @@
+.film-title {
+    font: 30px 'pt_sansbold';
+    color: #34303f;
+}
+.film-tabs {
+    .film-tabs--nav {
+        li.active a {
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            background: #C7C7C7;
+        }
+        li.film-tabs__hidden {            
+            a {
+                color: #999;
+                cursor: default;
+                &:focus {
+                    outline: none !important;
+                }
+                &::-moz-focus-inner {                    
+                    border: 0;
+                }
+            }
+        }
+    }
+    &__img {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    &__description {
+        font-size: 16px;        
+        span {
+            color: #A4A2A9;
+            margin-left: 20px;
+            &:first-of-type {
+                margin-left: 0;
+            }
+        }
+    }    
+}
+.section-1.film {
+    background: #000 url(../img/2-15.jpg) no-repeat bottom center;
+    background-size: auto;
+    background-size: cover;
+    padding: 0;
+    box-sizing: border-box;
+    color: #fff;
+    .container {
+        padding: 59px 100px;
+    }
+}

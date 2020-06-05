@@ -1,0 +1,19 @@
+.caption-btn__btn {
+    font: 18px/21.6px 'pt_sansbold';
+    box-shadow: 0 4px 0 #977000;
+    padding: 8px 20px;
+    background: #ffcc00;
+    border-radius: 24px;
+    color: #000;
+    margin: 0 5px;
+    display: inline-block;
+    text-shadow: none;
+    text-decoration: none;
+    position: relative;
+    border: none;
+    &:hover {
+        box-shadow: 0 -4px 0 #977000;
+        color: #34303f;
+        top: 4px;
+    }
+}
