@@ -19,7 +19,11 @@ function dump($var,$depth = 15, $highlight = true)
  * @param type $string
  * @return type
  */
-function mb_str_split( $string ) { 
-    return preg_split('/(?<!^)(?!$)/u', $string );
+ 
+if (!function_exists('mb_str_split')) {
+    function mb_str_split( $string ) 
+    { 
+        return preg_split('/(?<!^)(?!$)/u', $string );
+    }
 }
 
