@@ -13,6 +13,10 @@ YiiAsset::register($this);
 MainAsset::register($this);
 $this->beginPage();
 
+$loginFormModel = null;
+$registerFormModel = null;
+
+
 $menu = NavMenuHelper::getMenu();
 ?>
 <!DOCTYPE html>
