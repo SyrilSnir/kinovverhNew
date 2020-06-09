@@ -9,6 +9,8 @@
 <?php 
     if( Yii::$app->session->hasFlash('auth-error') ) {
         $errorMessage = Yii::$app->session->getFlash('auth-error');
+    } else {
+        $errorMessage = '';
     }
 
 ?>
