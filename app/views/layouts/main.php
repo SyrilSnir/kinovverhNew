@@ -31,8 +31,8 @@ $menu = NavMenuHelper::getMenu();
 <?php
     if (Yii::$app->user->isGuest) {
         $user = false;
-        $loginFormModel = $this->params['showLoginForm'] ? $this->params['LoginFormModel'] : null;
-        $registerFormModel = $this->params['showRegisterForm'] ? $this->params['RegisterFormModel'] : null;
+        $loginFormModel = isset($this->params['showLoginForm']) ? $this->params['LoginFormModel'] : null;
+        $registerFormModel = isset($this->params['showRegisterForm']) ? $this->params['RegisterFormModel'] : null;
     } else {
         $user = Yii::$app->user->getIdentity();
     }
