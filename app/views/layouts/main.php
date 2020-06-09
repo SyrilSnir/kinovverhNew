@@ -149,7 +149,7 @@ $menu = NavMenuHelper::getMenu();
 <?php endif; ?>
 <?php $this->endBody() ?> 
     <?php
-    if ($this->params['showLoginForm']) : ?>
+    if (isset($this->params['showLoginForm'])) : ?>
     <script>
     $(function(){
         console.log('Показать форму входа');
@@ -158,7 +158,7 @@ $menu = NavMenuHelper::getMenu();
     </script>
     <?php endif ;?>
     <?php
-    if ($this->params['showRegisterForm']) : ?>
+    if (isset($this->params['showRegisterForm'])) : ?>
     <script>
     $(function(){
         console.log('Показать форму регистрации');
