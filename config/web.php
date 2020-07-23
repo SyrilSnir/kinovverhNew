@@ -15,6 +15,7 @@ use yii\grid\GridViewAsset;
 use yii\widgets\ActiveFormAsset;
 use yii\validators\ValidationAsset;
 
+$params = require_once __DIR__ . '/params.php';
     return [
         'id' => 'kinovverh',
         'name' => 'Кинозал компании "ВВЕРХ"',
@@ -101,6 +102,6 @@ use yii\validators\ValidationAsset;
                 'defaultRoute' => 'main/index',                
             ]            
         ], 
-        'params' => require_once __DIR__ . '/params.php',
+        'params' => $params,
     ];
 

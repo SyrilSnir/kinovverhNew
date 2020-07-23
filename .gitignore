@@ -12,6 +12,11 @@ nbproject
 # windows thumbnail cache
 Thumbs.db
 
+#config
+/config/params.php
+/config/db.php
+/config/db-dev.php
+
 # composer vendor dir
 /vendor
 
@@ -35,4 +40,7 @@ tests/_support/_generated
 composer.lock
 #node modules
 /node_modules
-/web/assets/*
+
+#index files
+yii
+/web/index.php
