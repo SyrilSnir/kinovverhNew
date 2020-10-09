@@ -7,7 +7,7 @@
 use yii\widgets\Menu;
 ?>
 <?php
-    if ($options['top_block']) {
+    if (key_exists('top_block', $options)) {
         echo $this->render('../blocks/' . $options['top_block']['viewFile'],[
             'film' => $film
         ]);
