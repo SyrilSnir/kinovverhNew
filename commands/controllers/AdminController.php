@@ -2,21 +2,24 @@
 
 namespace app\commands\controllers;
 
-use yii\console\Controller;
-use yii\console\ExitCode;
-use app\models\ActiveRecord\User;
+use app\models\ActiveRecord\Country;
 use app\models\ActiveRecord\Film\Film;
-use app\models\ActiveRecord\Film\Znak;
-use app\models\ActiveRecord\Film\Genre;
-use app\models\ActiveRecord\Film\FilmGenre;
 use app\models\ActiveRecord\Film\FilmComment;
-use app\models\ActiveRecord\Person\FilmPersonOccupation;
+use app\models\ActiveRecord\Film\FilmGenre;
+use app\models\ActiveRecord\Film\Genre;
+use app\models\ActiveRecord\Film\Znak;
+use app\models\ActiveRecord\Media\MediaCategory;
 use app\models\ActiveRecord\Occupation;
 use app\models\ActiveRecord\Person;
+use app\models\ActiveRecord\Person\FilmPersonOccupation;
 use app\models\ActiveRecord\PersonOccupation;
-use app\models\ActiveRecord\Country;
-use app\models\ActiveRecord\Media\MediaCategory;
+use app\models\ActiveRecord\User;
+use app\models\ActiveRecord\UserType;
+use Exception;
 use Yii;
+use yii\console\Controller;
+use yii\console\ExitCode;
+use yii\helpers\Console;
 
 /**
  * Набор сервисных команд
@@ -116,6 +119,12 @@ class AdminController extends Controller
 
         return ExitCode::OK;
     }
+    
+    public function actionSetDirectory() 
+    {
+        UserType::deleteAll();
+        $this->setData(UserType::class, './../fixtures/user_types.php');
+    }
     protected function query($sql) {
         $link = Yii::$app->db;
         $link->open();
@@ -133,6 +142,50 @@ class AdminController extends Controller
             $model->save(false);
             unset($model);
         }                    
+    }
+
+    /**
+     * Первоначаьная установка ролей для пользователей
+     */
+    public function actionSetUserRoles()
+    {
+        $adminList = Yii::$app->params['rootUsers'] ?? [];
+        $usersWithUndefinedRoles = User::findAll(['user_type_id' => null]);
+        foreach ($usersWithUndefinedRoles as $currentUser) {
+            /** @var User $currentUser */
+            if (in_array($currentUser->login, $adminList)) {
+                $currentUser->user_type_id = UserType::ROOT_USER_ID;
+            } else {
+                $currentUser->user_type_id = UserType::DEFAULT_USER_ID;
+            }
+            $currentUser->save();
+        }
+        
+        $auth = Yii::$app->authManager;
+        $auth->removeAllAssignments();
+        $adminRole = $auth->getRole(UserType::ROOT_USER_TYPE);
+        $userRole = $auth->getRole(UserType::DEFAULT_USER_TYPE);
+        
+        $users = User::find()->all();
+        
+        foreach ($users as $user)
+        {
+        /**
+         * User $user
+         */
+            switch ($user->user_type_id) {
+                case UserType::ROOT_USER_ID:
+                    Console::output("Установлена роль 'Администратор' для пользователя {$user->login}");
+                    $auth->assign($adminRole, $user->id);
+                    break;
+                case UserType::DEFAULT_USER_ID:
+                    $auth->assign($userRole, $user->id);
+                     Console::output("Установлена роль 'Пользователь' для пользователя {$user->login}");
+                    break;
+            }
+        }
+        return ExitCode::OK;
+        
     }
     
     protected function addDefaultAdmin() 

@@ -9,7 +9,7 @@ if (YII_DEBUG) {
 } else {
     $db = require __DIR__ . '/db.php';
 }
-
+$params = require_once __DIR__ . '/params.php';
 $config = [
     'id' => 'expertcrm-console',
     'basePath' => realpath(__DIR__ .'/../'),
@@ -44,6 +44,7 @@ $config = [
         ],
     ],
     */
+    'params' => $params,
 ];
 return $config;
 

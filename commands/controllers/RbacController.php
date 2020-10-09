@@ -1,11 +1,11 @@
 <?php
 
-namespace app\commands\controllers;
-
-use yii\console\Controller;
-use yii\console\ExitCode;
 use app\core\manage\auth\Rbac;
-use Yii;
+use app\models\ActiveRecord\UserType;
+use yii\console\ExitCode;
+use yii\web\Controller;
+
+namespace app\commands\controllers;
 
 /**
  * Description of RbacController
@@ -18,11 +18,11 @@ class RbacController extends Controller
     {
         $auth = Yii::$app->authManager;
         $auth->removeAll();
-        $user = $auth->createRole('user');
+        $user = $auth->createRole(UserType::DEFAULT_USER_TYPE);
         $user->description = 'Пользователь';
         $auth->add($user);
 
-        $admin = $auth->createRole('admin');
+        $admin = $auth->createRole(UserType::ROOT_USER_TYPE);
         $admin->description = 'Администратор';
         $auth->add($admin);
         $auth->addChild($admin, $user);

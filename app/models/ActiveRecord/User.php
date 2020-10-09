@@ -17,6 +17,7 @@ use Yii;
  * @property string $birthday
  * @property integer $bitrix_user
  * @property integer $external
+ * @property integer $user_type_id
  * @property boolean $active
  * @property integer $created_at
  * @property integer $updated_at
@@ -37,7 +38,7 @@ class User extends ActiveRecord
         $user = new self();
         $user->login = $login;
         $user->fio = $fio;
-
+        $user->user_type_id = UserType::DEFAULT_USER_ID;
         $user->setPassword($password);
         $user->setAuthKey();
         return $user;                        
