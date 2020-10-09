@@ -35,7 +35,7 @@
     "bootstrap-sass": "^3.4.1",
     "bxslider": "^4.2.14",
     "handlebars": "^4.5.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.16.0",
     "video.js": "^7.6.5"
   }
