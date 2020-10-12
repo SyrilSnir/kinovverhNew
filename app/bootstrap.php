@@ -1,5 +1,6 @@
 <?php
 Yii::setAlias('@views', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'views');
+Yii::setAlias('@widgets', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'widgets');
 Yii::setAlias('@kinozalViews', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' 
         . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'kinozal' . DIRECTORY_SEPARATOR. 'views');
 Yii::setAlias('@layouts', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app'. DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layouts');

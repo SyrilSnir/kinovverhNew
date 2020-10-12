@@ -5,9 +5,8 @@ defined('YII_ENV') or define('YII_ENV', 'test');
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-require __DIR__ . '/../config/functions.php';
-require __DIR__ . '/../config/bootstrap.php';
-
+require __DIR__ . '/../app/functions.php';
+require __DIR__ . '/../app/bootstrap.php';
 
 $baseConfig = require __DIR__  . '/../config/web.php';
 $componentsConfig['components']['urlManager'] = require __DIR__  . '/../config/urlManager.php';

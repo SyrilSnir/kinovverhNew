@@ -41,8 +41,6 @@ class VideoService
         $mediaUrl = $model->getUploadedFileUrl('name');
         $model->edit( 
                 $model->description, 
-                $mediaPath,
-                $mediaUrl,
                 $file->size, 
                 $file->type
                 );

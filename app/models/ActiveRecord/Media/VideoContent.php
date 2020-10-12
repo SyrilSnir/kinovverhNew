@@ -32,7 +32,7 @@ class VideoContent extends ActiveRecord
     
     public function behaviors(): array
     {
-        $videoContentPath = $anonsImagePath = Yii::getAlias('@kinofilmPath');
+        $videoContentPath = Yii::getAlias('@kinofilmPath');
         
         return [
                     [            
@@ -44,12 +44,10 @@ class VideoContent extends ActiveRecord
             ];
     }
 
-    public static function create($description = '', $path = '', $url = '', $size = '', $mimeType = ''): self
+    public static function create($description = '', $size = '', $mimeType = ''): self
     {        
         $videoContent = new self();
         $videoContent->description = $description;
-        $videoContent->path = $path;
-        $videoContent->url = $url;
         $videoContent->size = $size;
         $videoContent->media_category_id = MediaCategory::CATEGORY_FILM_MP4;
         $videoContent->mime_type = $mimeType;
@@ -59,12 +57,10 @@ class VideoContent extends ActiveRecord
         
     }
 
-    public function edit($description = '', $path = '', $url = '', $size = '', $mimeType = '')
+    public function edit($description = '', $size = '', $mimeType = '')
     {
         $mediaCategoryId = MediaCategory::CATEGORY_FILM_MP4;      
         $this->description = $description;
-        $this->path = $path;
-        $this->url = $url;
         $this->size = $size;
         $this->mime_type = $mimeType;
         $this->media_category_id = $mediaCategoryId;
@@ -76,8 +72,26 @@ class VideoContent extends ActiveRecord
         return parent::find()->where(['media_category_id' => MediaCategory::CATEGORY_FILM_MP4]);
     }
     
-    public function setFile(UploadedFile $file) 
+    public function setFile(UploadedFile $file):void
     {
         $this->name = $file;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getUrl():string
+    {
+        return $this->getUploadedFileUrl('name');
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getPath():string
+    {
+        return $this->getUploadedFilePath('name');
     }
 }
