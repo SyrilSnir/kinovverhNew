@@ -23,6 +23,9 @@ $this->title = 'ДОБРО ПОЖАЛОВАТЬ В ОНЛАЙН КИНОЗАЛ �
         </div>
     </div>
 </section>
+<div class = "container">
 <?php 
+
 echo ShowPopularWidget::widget();
 ?>
+</div>

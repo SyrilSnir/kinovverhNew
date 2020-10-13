@@ -99,9 +99,7 @@ $menu = NavMenuHelper::getMenu();
     
 ?>
         <div class="page-content">
-            <div class="container">
 <?php echo $content ?>
-            </div>
         </div>
     <footer>
         <div class="container">
