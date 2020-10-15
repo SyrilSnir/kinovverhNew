@@ -99,9 +99,9 @@ class FilmsController extends BaseAdminController
             'galleryImageList' => $galleryImageList,
             'trailersVideoList' => $trailersVideoList,
             'personList' => PersonHelper::getPersonList()
-        ]);
-                
+        ]);                
     }
+    
     /**
      * @param integer $id
      * @return mixed
