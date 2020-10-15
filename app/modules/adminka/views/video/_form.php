@@ -1,32 +1,13 @@
-<?php 
+<?php
+
+use app\models\Forms\Media\VideoFileForm;
+use kartik\select2\Select2;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
-use kartik\file\FileInput;
 
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\Forms\Media\VideoFileForm */
+/* @var $form ActiveForm */
+/* @var $model VideoFileForm */
 
-
-$videoFilePluginOptions = [
-            'previewFileType' => 'video',
-            'showRemove' => false,
-            'initialPreviewFileType'=> 'video',
-            'initialPreviewConfig'=> [
-                ['filetype'=> "video/mp4"]
-            ],
-            'validateInitialCount' => true,
-            'initialPreviewAsData' => true,
-            'allowedFileExtensions' => ['mp4'],
-            'showUpload' => true
-    ];
-if ($model->videoFileUrl) {
-    $videoFilePluginOptions = array_merge($videoFilePluginOptions, [
-        'initialPreview'=>[
-             $model->videoFileUrl
-        ],
-        'initialPreviewAsData'=>true,
-    ]);
-}
 ?>
 <div class="videofile-form">
 <?php 
@@ -36,12 +17,14 @@ if ($model->videoFileUrl) {
 ?>
     <div class="box box-default">
         <div class="box-body">  
-         <?php echo $form->field($model, 'description')->textInput()?>
-         <?php echo $form->field($model, 'file')->widget(FileInput::classname(), [
-                        'options' => ['accept' => '/video/*', 'multiple' => false],
-                        'pluginOptions' =>  $videoFilePluginOptions
-                    ]);
-         ?>
+<?php 
+
+echo $form->field($model, 'description')->textInput();        
+echo $form->field($model, 'file')->widget(Select2::class, 
+        [
+            'data' => $model->getFilesList()
+        ]);
+?>
 
         </div>
             

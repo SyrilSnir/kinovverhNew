@@ -52,8 +52,16 @@ class AdminMenuHelper implements MenuHelperInterface
                     'label' => 'Медиатека',
                     'icon' => 'share',
                     'items' => [
-                        ['label' => 'Видео файлы', 'icon' => 'file-video-o', 'url' => ['/adminka/video'],],
-                        ['label' => 'Аудио файлы', 'icon' => 'file-audio-o', 'url' => ['/adminka/audio'],],
+                        ['label' => 'Видео материалы', 'icon' => 'file-video-o', 'url' => ['/adminka/video'],],
+                        ['label' => 'Аудио материалы', 'icon' => 'file-audio-o', 'url' => ['/adminka/audio'],],
+                        [   
+                            'label' => 'Загрузка файлов', 
+                            'icon' => 'upload', 
+                            'items' => [
+                                ['label' => 'Видеофайл', 'icon' => 'file-video', 'url' => ['/adminka/file-manager/video'],],
+                                ['label' => 'Аудиофайл', 'icon' => 'file-audio', 'url' => ['/adminka/file-manager/audio'],],
+                            ]
+                        ],
                     ]
                 ]
             ]

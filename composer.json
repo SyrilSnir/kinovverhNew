@@ -18,7 +18,10 @@
         "mihaildev/yii2-ckeditor": "^1.0",
         "kartik-v/yii2-widget-fileinput": "^1.0",
         "yii-dream-team/yii2-upload-behavior": "*",
-        "2amigos/yii2-multi-select-widget": "*"
+        "2amigos/yii2-multi-select-widget": "*",
+        "mihaildev/yii2-elfinder": "*",
+        "2amigos/yii2-file-upload-widget": "^1.0",
+        "kartik-v/yii2-widget-select2": "^2.2"
     },
     "autoload":{
         "psr-4": {          

@@ -2,11 +2,11 @@
 
 namespace app\modules\adminka\controllers;
 
-
 use app\core\repositories\Media\AudioRepository;
 use app\core\services\operations\Media\AudioService;
+use app\models\Forms\Media\AudioMaterialForm;
 use app\models\SearchModels\Media\AudioSearch;
-use app\models\Forms\Media\AudioFileForm;
+use DomainException;
 use Yii;
 
 /**
@@ -59,7 +59,7 @@ class AudioController extends BaseAdminController
     public function actionUpdate($id)
     {
         $audioContent = $this->findModel($this->repository, $id);
-        $form = new AudioFileForm($audioContent);
+        $form = new AudioMaterialForm($audioContent);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             $this->service->edit($$id, $form);
             return $this->redirect(['view', 'id' => $country->id]);
@@ -73,12 +73,12 @@ class AudioController extends BaseAdminController
 
     public function actionCreate()
     {
-        $form = new AudioFileForm();
+        $form = new AudioMaterialForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $audioContent = $this->service->create($form);
                 return $this->redirect(['view', 'id' => $audioContent->id]);
-            } catch (\DomainException $e) {
+            } catch (DomainException $e) {
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
@@ -95,7 +95,7 @@ class AudioController extends BaseAdminController
     {
         try {
             $this->service->remove($id);
-        } catch (\DomainException $e) {
+        } catch (DomainException $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(['index']);
