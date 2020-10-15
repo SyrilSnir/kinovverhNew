@@ -3,9 +3,11 @@
 namespace app\core\services\operations\Media;
 
 use app\core\repositories\Media\VideoRepository;
+use app\models\ActiveRecord\Film\Film;
 use app\models\ActiveRecord\Media\VideoContent;
-use app\models\Forms\Media\VideoFileForm;
-use yii\web\UploadedFile;
+use app\models\Forms\Media\VideoMaterialForm;
+use Yii;
+use yii\helpers\StringHelper;
 
 /**
  * Description of VideoService
@@ -24,33 +26,20 @@ class VideoService
         $this->videoRepository = $repository; 
     }
     
-    public function create(VideoFileForm $form)
+    public function create(VideoMaterialForm $form)
     {
-        $videoFile = VideoContent::create($form->description);
-        if ($form->file) {
-            $videoFile->setFile($form->file);
-        }
-       $this->videoRepository->save($videoFile);
-        $this->setVideoFileFields($videoFile, $form->file);
+        $file = StringHelper::base64UrlDecode($form->file);
+        $videoFile = VideoContent::create($file, $form->description);
+        $this->videoRepository->save($videoFile);
         return $videoFile; 
-    }
-    
-    protected function setVideoFileFields(VideoContent $model, UploadedFile $file) 
-    {
-        $mediaPath = $model->getUploadedFilePath('name');
-        $mediaUrl = $model->getUploadedFileUrl('name');
-        $model->edit( 
-                $model->description, 
-                $file->size, 
-                $file->type
-                );
-        $this->videoRepository->save($model);
-    }
+    }    
     
     public function remove ($id) 
     {
         /* @var $model VideoContent */
-         $model = $this->videoRepository->findById($id);
-         $this->videoRepository->remove($model);
+        $db = Yii::$app->db;
+        $model = $this->videoRepository->findById($id);
+        $this->videoRepository->remove($model);
+        $db->createCommand()->update(Film::tableName(), ['media_id' => NULL],['media_id' => $id])->execute();         
     }
 }

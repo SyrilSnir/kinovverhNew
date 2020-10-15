@@ -2,11 +2,12 @@
 
 namespace app\modules\adminka\controllers;
 
-use app\models\Forms\Media\VideoFileForm;
-use app\models\SearchModels\Media\VideoSearch;
-use app\core\services\operations\Media\VideoService;
 use app\core\repositories\Media\VideoRepository;
-
+use app\core\services\operations\Media\VideoService;
+use app\models\Forms\Media\VideoFileForm;
+use app\models\Forms\Media\VideoMaterialForm;
+use app\models\SearchModels\Media\VideoSearch;
+use DomainException;
 use Yii;
 
 /**
@@ -59,7 +60,7 @@ class VideoController extends BaseAdminController
     public function actionUpdate($id)
     {
         $videoContent = $this->findModel($this->repository, $id);
-        $form = new VideoFileForm($videoContent);
+        $form = new VideoMaterialForm($videoContent);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             $this->service->edit($$id, $form);
             return $this->redirect(['view', 'id' => $country->id]);
@@ -73,12 +74,13 @@ class VideoController extends BaseAdminController
 
     public function actionCreate()
     {
-        $form = new VideoFileForm();
+        $form = new VideoMaterialForm();
+       
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $videoContent = $this->service->create($form);
                 return $this->redirect(['view', 'id' => $videoContent->id]);
-            } catch (\DomainException $e) {
+            } catch (DomainException $e) {
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
@@ -95,7 +97,7 @@ class VideoController extends BaseAdminController
     {
         try {
             $this->service->remove($id);
-        } catch (\DomainException $e) {
+        } catch (DomainException $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(['index']);

@@ -4,8 +4,8 @@ namespace app\core\services\operations\Media;
 
 use app\core\repositories\Media\AudioRepository;
 use app\models\ActiveRecord\Media\AudioContent;
-use app\models\Forms\Media\AudioFileForm;
-use yii\web\UploadedFile;
+use app\models\Forms\Media\AudioMaterialForm;
+use yii\helpers\StringHelper;
 
 /**
  * Description of AudioService
@@ -24,29 +24,12 @@ class AudioService
         $this->audioRepository = $repository; 
     }
     
-    public function create(AudioFileForm $form)
+    public function create(AudioMaterialForm $form)
     {
-        $audioFile = AudioContent::create($form->description);
-        if ($form->file) {
-            $audioFile->setFile($form->file);
-        }
-       $this->audioRepository->save($audioFile);
-        $this->setAudioFileFields($audioFile, $form->file);
+        $file = StringHelper::base64UrlDecode($form->file);
+        $audioFile = AudioContent::create($file, $form->description);
+        $this->audioRepository->save($audioFile);
         return $audioFile; 
-    }
-    
-    protected function setAudioFileFields(AudioContent $model, UploadedFile $file) 
-    {
-        $mediaPath = $model->getUploadedFilePath('name');
-        $mediaUrl = $model->getUploadedFileUrl('name');
-        $model->edit( 
-                $model->description, 
-                $mediaPath,
-                $mediaUrl,
-                $file->size, 
-                $file->type
-                );
-        $this->audioRepository->save($model);
     }
     
     public function remove ($id) 

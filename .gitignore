@@ -20,6 +20,7 @@ Thumbs.db
 # composer vendor dir
 /vendor
 
+/app/controllers/TestController.php
 # composer itself is not needed
 composer.phar
 

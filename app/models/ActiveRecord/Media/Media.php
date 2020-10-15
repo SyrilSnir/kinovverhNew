@@ -2,7 +2,9 @@
 
 namespace app\models\ActiveRecord\Media;
 
+use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\FileHelper;
 
 /**
  * Загруженные медиафайлы
@@ -16,59 +18,53 @@ use yii\db\ActiveRecord;
  * @property string $mime_type
  * @property string $extension
  * @property int $media_category_id
- * 
  * @author kotov
  */
-class Media extends ActiveRecord
+abstract class Media extends ActiveRecord
 {    
+    const FILE_DEFAULT_EXTENSION = '';
+    const MEDIA_CATEGORY = 0;
+    const URL_ALIAS = '';
+    const PATH_ALIAS = '';
+        
     public static function tableName(): string
     {
         return '{{%media}}';
-    }
+    }    
     
-    public static function create(
-            $name,
-            $description,
-            $path,
-            $url,
-            $size,
-            $mimeType,
-            $extension = '',
-            $mediaCategoryId = null
-            ):self
+    public static function create($file,$description = ''): self
+    {        
+        $content = new static();
+        $content->name = $file;        
+        $content->description = $description;
+        $content->size = filesize($content->path);
+        $content->mime_type = FileHelper::getMimeType($content->path);
+        $content->media_category_id = static::MEDIA_CATEGORY;       
+        $content->extension = static::FILE_DEFAULT_EXTENSION;
+
+        return $content;        
+    }  
+
+    public function edit($file, $description = '')
     {
-        $media = new self();
-        $media->name = $name;
-        $media->description = $description;
-        $media->path = $path;
-        $media->url = $url;
-        $media->size = $size;
-        $media->mime_type = $mimeType;
-        $media->extension = $extension;
-        $media->media_category_id = $mediaCategoryId;
-                
-        return $media;
-    }
-    
-    public function edit(
-            $name,
-            $description,
-            $path,
-            $url,
-            $size,
-            $mimeType,
-            $extension = '',
-            $mediaCategoryId = null
-            ) 
-    {
-        $this->name = $name;
+        $this->file = $file;
         $this->description = $description;
-        $this->path = $path;
-        $this->url = $url;
-        $this->size = $size;
-        $this->mime_type = $mimeType;
-        $this->extension = $extension;
-        $this->media_category_id = $mediaCategoryId;
+        $this->size = filesize($this->path);
+        $this->mime_type = FileHelper::getMimeType($this->path);
+    }  
+    
+    public static function find()
+    {
+        return parent::find()->where(['media_category_id' => static::MEDIA_CATEGORY]);
+    }    
+
+    public function getUrl():string
+    {
+        return Yii::getAlias(static::URL_ALIAS) . '/' . $this->name;
     }
     
+    public function getPath():string
+    {
+        return Yii::getAlias(static::PATH_ALIAS) . DIRECTORY_SEPARATOR . $this->name;
+    }    
 }
