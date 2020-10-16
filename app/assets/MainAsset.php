@@ -15,7 +15,6 @@ class MainAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/main.css',
-        'css/video-js.css',
         'css/jquery.bxslider.css',
     ];
     public $js = [
