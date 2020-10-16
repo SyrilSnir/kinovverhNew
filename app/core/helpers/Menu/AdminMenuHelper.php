@@ -63,7 +63,13 @@ class AdminMenuHelper implements MenuHelperInterface
                             ]
                         ],
                     ]
-                ]
+                ],
+                [
+                    'label' => 'Виджеты',
+                    'icon' => 'tv',
+                    'items' => [                        
+                    ]
+                ],                
             ]
         ];
     }
