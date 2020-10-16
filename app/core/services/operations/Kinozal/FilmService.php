@@ -73,11 +73,16 @@ class FilmService
             $film->setAnonsImageFile($form->anonsImageFile);
         }
         
+        if ($form->detailImageFile) {
+            $film->setDetailImageFile($form->detailImageFile);
+        }
+        
         if ($form->kinopanoramaFile) {
             $film->setKinopanoramaFile($form->kinopanoramaFile);
         }
         $this->films->save($film);
         $this->setAnonsImageUrl($film);
+        $this->setDetailImageUrl($film);
         $this->savePostProcess($film, $form);
         return $film;
     }
@@ -103,11 +108,16 @@ class FilmService
             $film->setAnonsImageFile($form->anonsImageFile);
         }
         
+        if ($form->detailImageFile) {
+            $film->setDetailImageFile($form->detailImageFile);
+        }        
+        
         if ($form->kinopanoramaFile) {
             $film->setKinopanoramaFile($form->kinopanoramaFile);
         }        
         $this->films->save($film);
         $this->setAnonsImageUrl($film);  
+        $this->setDetailImageUrl($film);  
         $this->savePostProcess($film, $form);        
     }
     
@@ -202,6 +212,15 @@ class FilmService
             $this->films->save($film);
         }        
     }
+    
+    protected function setDetailImageUrl(Film $film)
+    {
+        $detailImageUrl = $film->getUploadedFileUrl('detailImageFile');            
+        if ($detailImageUrl) {
+            $film->setDetailImage($detailImageUrl);            
+            $this->films->save($film);
+        }        
+    }    
     
     protected function savePostProcess(Film $film, FilmForm $form)
     {

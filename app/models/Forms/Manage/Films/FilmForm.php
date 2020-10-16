@@ -52,8 +52,13 @@ abstract class FilmForm extends Model
      * @var Media
      */
     public $kinopanorama;
+    
     public $anonsImageFile;
     public $anonsImage;
+    
+    public $detailImageFile;
+    public $detailImage;   
+    
     public $kinopanoramaActive; 
     public $kinopanoramaFile;
 
@@ -65,7 +70,7 @@ abstract class FilmForm extends Model
             [['editorsList', 'actorsList','genreList'],'each', 'rule' => ['integer']],
             [['editorsList', 'actorsList','genreList'],'default', 'value' => []],
             [['category','country','year','time','media'],'integer'],
-            [['anonsImageFile'], 'image'],
+            [['anonsImageFile','detailImageFile'], 'image'],
             [['kinopanoramaFile'], 'file','skipOnEmpty' => true, 'extensions' => 'mp4'],
             [['kinopanoramaActive'], 'boolean'], 
         ];
@@ -75,6 +80,7 @@ abstract class FilmForm extends Model
     {
         if (parent::beforeValidate()) {
             $this->anonsImageFile = UploadedFile::getInstance($this, 'anonsImageFile');
+            $this->detailImageFile = UploadedFile::getInstance($this, 'detailImageFile');
             $this->kinopanoramaFile = UploadedFile::getInstance($this, 'kinopanoramaFile');
             return true;
         }
@@ -111,6 +117,7 @@ abstract class FilmForm extends Model
             'name' => 'Название фильма',
             'code' => 'Символьный идентификатор',
             'anonsImageFile' => 'Изображение для анонса',
+            'detailImageFile' => 'Основное изображение',
             'previewText' => 'Текст для анонса',
             'detailText' => 'Подробное описание',
             'rating' => 'Рейтинг',

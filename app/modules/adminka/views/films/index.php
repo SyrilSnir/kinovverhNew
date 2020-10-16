@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'label' => 'Анонс',
                             'value' => 'preview_text',
+                            'format' => 'html',
                             'contentOptions' => ['style' => 'width: 400px'],
                         ],                       
                         [

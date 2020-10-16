@@ -50,6 +50,10 @@ class FilmEditForm extends FilmForm
         if ($model->hasAnonsImage()) {
             $this->anonsImage = $model->getAnonsImage();
         }
+        
+        if ($model->hasDetailImage()) {
+            $this->detailImage = $model->getDetailImage();
+        }
         $this->editorsList = $model->editors;
                 //[1 => 'Рязанов',3 => 'Иванов'];
         $this->actorsList = $model->actors;

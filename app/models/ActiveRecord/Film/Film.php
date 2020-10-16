@@ -37,6 +37,7 @@ use Yii;
  * @property string $images
  * @property string $anonsImage картинка для вывода в категории
  * @property UploadedFile $anonsImageFile 
+ * @property UploadedFile $detailImageFile 
  * @property string $detailImage картинка для вывода в детальном показе
  * @property boolean $kinopanorama_active Показать кинопанораму (да/нет)
  * @property Media $kinopanorama Показать кинопанораму (да/нет)
@@ -70,6 +71,13 @@ class Film extends ActiveRecord
      * @var UploadedFile
      */
     public $anonsImageFile;
+    
+    /**
+     *
+     * @var UploadedFile
+     */
+    public $detailImageFile;
+    
     /**
      *
      * @var UploadedFile
@@ -87,6 +95,7 @@ class Film extends ActiveRecord
     {
         parent::__construct($config);
         $anonsImagePath = Yii::getAlias('@filmsAnonsImagePath');
+        $detailImagePath = Yii::getAlias('@filmsDetailImagePath');
         $kinopanoramaMediaPath = Yii::getAlias('@filmsKinopanoramaMediaPath'); 
         $this->attachBehavior('imageUploadBehavior', [
             'class' => FileUploadBehavior::class,
@@ -94,6 +103,12 @@ class Film extends ActiveRecord
             'filePath' => $anonsImagePath . DIRECTORY_SEPARATOR . '[[pk]]-anons.[[extension]]',
             'fileUrl' => '@filmsAnonsImageUrl/[[pk]]-anons.[[extension]]'                     
         ]);
+        $this->attachBehavior('imageUploadBehavior', [
+            'class' => FileUploadBehavior::class,
+            'attribute' => 'detailImageFile',
+            'filePath' => $detailImagePath . DIRECTORY_SEPARATOR . '[[pk]]-detail.[[extension]]',
+            'fileUrl' => '@filmsDetailImageUrl/[[pk]]-detail.[[extension]]'                     
+        ]);        
         $this->attachBehavior('kinopanoramaUploadBehavior', [
             'class' => FileUploadBehavior::class,
             'attribute' => 'kinopanoramaFile',
@@ -134,6 +149,11 @@ class Film extends ActiveRecord
     public function setAnonsImageFile(UploadedFile $file) 
     {
         $this->anonsImageFile = $file;
+    }
+
+    public function setDetailImageFile(UploadedFile $file) 
+    {
+        $this->detailImageFile = $file;
     }
     
     public function setKinopanoramaFile(UploadedFile $file) 
@@ -225,13 +245,13 @@ class Film extends ActiveRecord
         $noImageUrl = Yii::getAlias('@filmsImageUrl') . '/no-image.jpg';
         return $this->getImage('anons_image', $noImageUrl);
     }
-
+    
     public function getDetailImage() : string
     {
         $noImageUrl = Yii::getAlias('@filmsImageUrl') . '/no-image.jpg';
-        return $this->getImage('detail_image',$noImageUrl);
-    }
-    
+        return $this->getImage('detail_image', $noImageUrl);
+    }    
+  
     public function getAvailableComments() 
     {
         return $this->hasMany(FilmComment::class, ['film_id' => 'id'])->where('moderate = 1');
@@ -249,6 +269,13 @@ class Film extends ActiveRecord
         $imagesInfo['anons_image'] = $anonsImageUrl;
         $this->images = \GuzzleHttp\json_encode($imagesInfo);
     }
+
+    public function setDetailImage($detailImageUrl)
+    {
+        $imagesInfo = $this->loadImagesInfo();
+        $imagesInfo['detail_image'] = $detailImageUrl;
+        $this->images = \GuzzleHttp\json_encode($imagesInfo);
+    }    
 
     public function hasDetailImage() : bool
     {

@@ -12,6 +12,13 @@ Yii::setAlias('@filmsAnonsImagePath',   dirname(__DIR__)
         . DIRECTORY_SEPARATOR . 'films'
         . DIRECTORY_SEPARATOR . 'anons'
         );
+Yii::setAlias('@filmsDetailImagePath',   dirname(__DIR__)
+        . DIRECTORY_SEPARATOR . 'web' 
+        . DIRECTORY_SEPARATOR . 'files' 
+        . DIRECTORY_SEPARATOR . 'images'
+        . DIRECTORY_SEPARATOR . 'films'
+        . DIRECTORY_SEPARATOR . 'detail'
+        );
 Yii::setAlias('@filmsKinopanoramaMediaPath',   dirname(__DIR__)
         . DIRECTORY_SEPARATOR . 'web' 
         . DIRECTORY_SEPARATOR . 'files'
@@ -51,6 +58,7 @@ Yii::setAlias('@albumPath',   dirname(__DIR__)
 
 Yii::setAlias('@filmsImageUrl', '/files/images/films');
 Yii::setAlias('@filmsAnonsImageUrl', '/files/images/films/anons');
+Yii::setAlias('@filmsDetailImageUrl', '/files/images/films/detail');
 Yii::setAlias('@filmsKinopanoramaUrl', '/files/media/kinopanorama');
 Yii::setAlias('@galleryUrl', '/files/images/gallery');
 Yii::setAlias('@trailersUrl', '/files/media/trailers');

@@ -16,16 +16,27 @@ use dosamigos\multiselect\MultiSelectListBox;
 /* @var $personList array */
  /** @var Gallery[] $galleryImageList */
  /** @var Trailers[] $trailersVideoList */
-if (!$update || !$model->anonsImage) {
-    $pluginOptions = [];
-} else {
-    $pluginOptions = [
-        'showRemove' => false,
-        'initialPreview'=>[
-             $model->anonsImage
-        ],
-        'initialPreviewAsData'=>true,
-    ];
+$pluginAnonsImageOptions = [];
+$pluginDetailImageOptions = [];
+if ($update) {
+    if ($model->anonsImage) {
+        $pluginAnonsImageOptions = [
+            'showRemove' => false,
+            'initialPreview'=>[
+                 $model->anonsImage
+            ],
+            'initialPreviewAsData'=>true,
+        ];
+    }
+    if ($model->detailImage) {
+        $pluginDetailImageOptions = [
+            'showRemove' => false,
+            'initialPreview'=>[
+                 $model->detailImage
+            ],
+            'initialPreviewAsData'=>true,
+        ];        
+    }
 }
 $galleryPreview = [];
 $galleryPreviewConfig = [];
@@ -146,7 +157,7 @@ if ($model->kinopanorama) {
                                 'accept' => 'image/*',
                                 'multiple' => false
                             ],
-                            'pluginOptions' => $pluginOptions
+                            'pluginOptions' => $pluginAnonsImageOptions
                         ])
                     ?>
                         <?php echo $form->field($model, 'previewText')->widget(CKEditor::class)?>
@@ -157,6 +168,15 @@ if ($model->kinopanorama) {
         <div class="tab-pane fade" id="tab3">
             <div class="box box-default">
                 <div class="box-body">
+                    <?= $form->field($model, 'detailImageFile')->widget(FileInput::class, 
+                        [
+                            'options' => [
+                                'accept' => 'image/*',
+                                'multiple' => false
+                            ],
+                            'pluginOptions' => $pluginDetailImageOptions
+                        ])
+                    ?>                    
                     <?php echo $form->field($model, 'detailText')->widget(CKEditor::class)?>
                 </div>
             </div>
