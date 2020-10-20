@@ -17,7 +17,8 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property int|null $film_id Фильм
  * @property int|null $sort Порядковый носмер
  * @property Film|null $film Фильм, связанный с элементом
- * @method string|bull getUploadedFileUrl(string $attribute) Путь к файлу с изображением
+ * @method string|null getUploadedFileUrl(string $attribute) URL изображения
+ * @method string|null getUploadedFilePath(string $attribute) Путь к файлу с изображением
  */
 class CarouselWidgetElement extends ActiveRecord
 {

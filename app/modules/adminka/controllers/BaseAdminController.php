@@ -42,4 +42,18 @@ abstract class BaseAdminController extends Controller
         }
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    
+    /**
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        try {
+            $this->service->remove($id);
+        } catch (DomainException $e) {
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+        return $this->redirect(['index']);
+    }    
 }

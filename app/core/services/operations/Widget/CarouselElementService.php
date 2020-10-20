@@ -5,6 +5,7 @@ namespace app\core\services\operations\Widget;
 use app\core\repositories\Widgets\CarouselElementRepository;
 use app\models\ActiveRecord\Widget\CarouselWidgetElement;
 use app\models\Forms\Manage\Widgets\CarouselElementForm;
+use yii\helpers\FileHelper;
 
 /**
  * Description of CarouselElementService
@@ -43,5 +44,16 @@ class CarouselElementService
             $element->setImage($form->image);
         }
         $this->carouselElements->save($element);
+    }
+    
+    public function remove(int $id)
+    {
+        /** @var CarouselWidgetElement $element */        
+        $element = $this->carouselElements->findById($id);        
+        $linkedFile = $element->getUploadedFilePath('image');
+        if (is_file($linkedFile)) {
+            FileHelper::unlink($linkedFile);
+        }
+        $this->carouselElements->remove($element);
     }
 }
