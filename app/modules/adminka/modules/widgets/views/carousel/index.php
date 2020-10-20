@@ -13,13 +13,13 @@ use yii\web\View;
 /* @var $searchModel WidgetSearch */
 /* @var $dataProvider ActiveDataProvider */
 
-$this->title = 'Управление виджетами';
+$this->title = 'Элементы галереи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
     <p>
-        <?= Html::a('Новый виджет', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Новый элемент', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <div class="box">
