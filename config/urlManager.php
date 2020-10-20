@@ -6,13 +6,14 @@ return [
     'showScriptName' => false,
     'rules' => [
         
-        [
+       [
             'pattern' => '',
             'route' => 'kinozal',
             'suffix' => ''
         ],
         'adminka/<controller>/<action>' => 'adminka/<controller>/<action>',
-        'adminka/<controller>/<action><id:[\d]+>' => 'adminka/<controller>/<action>',
+        'adminka/<controller>/<action>/<id:[\d]+>' => 'adminka/<controller>/<action>',
+       'adminka/widgets/<controller>/<action>' => 'adminka/widgets/<controller>/<action>',
         'about/<page:[\w\-]+>' => 'static-pages/index',    // статические страницы
         'lk' => 'cabinet/index', // личный кабинет пользователя
         'lk/<action:[\w\-]+>' => 'cabinet/<action>', // личный кабинет пользователя

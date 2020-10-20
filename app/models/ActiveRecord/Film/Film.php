@@ -35,6 +35,7 @@ use Yii;
  * @property integer $time
  * @property integer $rating
  * @property string $images
+ * @property string $url Url адрес для просмотра
  * @property string $anonsImage картинка для вывода в категории
  * @property UploadedFile $anonsImageFile 
  * @property UploadedFile $detailImageFile 
@@ -323,5 +324,10 @@ class Film extends ActiveRecord
                                     $imagesArray[$type] : 
                                     $defaultValue;
         return $filmImage;
+    }
+    
+    public function getUrl():string
+    {
+        return '/kinozal/' . $this->code . '/view';
     }
 }

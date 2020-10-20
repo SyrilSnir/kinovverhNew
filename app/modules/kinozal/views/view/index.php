@@ -29,7 +29,7 @@ if (!$showFilm) {
 ])?>
     <p class="caption-btn">
         <?php if(!$showFilm):?>
-        <a class="caption-btn__btn" href="/kinozal/<?php echo $film->code?>/view">Смотреть онлайн</a>  
+        <a class="caption-btn__btn" href="<?php echo $film->url ?>">Смотреть онлайн</a>  
         <?php endif; ?>
     </p>
 

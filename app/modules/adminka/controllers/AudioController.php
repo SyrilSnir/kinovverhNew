@@ -61,14 +61,12 @@ class AudioController extends BaseAdminController
         $audioContent = $this->findModel($this->repository, $id);
         $form = new AudioMaterialForm($audioContent);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $this->service->edit($$id, $form);
+            $this->service->edit($id, $form);
             return $this->redirect(['view', 'id' => $country->id]);
         }
         return $this->render('update', [
             'model' => $form,
-        ]); 
-        
-                
+        ]);                         
     }
 
     public function actionCreate()
