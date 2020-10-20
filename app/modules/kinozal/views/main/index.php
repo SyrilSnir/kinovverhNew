@@ -1,7 +1,13 @@
 <?php 
-/** @var \yii\web\View $this */
+/** @var View $this */
+
 use app\widgets\Category\ShowPopularWidget;
+use app\widgets\MainPageCarousel\CarouselWidget;
+use yii\web\View;
 $this->title = 'ДОБРО ПОЖАЛОВАТЬ В ОНЛАЙН КИНОЗАЛ КИНОКОМПАНИИ "ВВЕРХ"!';
+?>
+<?php 
+    echo CarouselWidget::widget();
 ?>
 <section id="f-cat" class="f-cat-home">
     <div class="f-cat-bg"></div>

@@ -64,7 +64,7 @@ class CountriesController extends BaseAdminController
          $country = $this->findModel($this->repository, $id);
          $form = new CountryForm($country);
          if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $this->service->edit($$id, $form);
+            $this->service->edit($id, $form);
             return $this->redirect(['view', 'id' => $country->id]);
         }
         return $this->render('update', [

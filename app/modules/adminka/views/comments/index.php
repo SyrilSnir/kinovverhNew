@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'film_id',
                         'label' => 'Фильм',
-                       'filter' => $searchModel->filmsList(),
+                        'filter' => $searchModel->filmsList(),
                         'value' => 'film.name'
                     ],
                     'user_name:text:Автор',

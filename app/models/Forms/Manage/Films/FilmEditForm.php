@@ -13,8 +13,6 @@ use app\models\Forms\Media\TrailersForm;
  */
 class FilmEditForm extends FilmForm
 {
-
-
     /**
      *
      * @var GalleryForm;

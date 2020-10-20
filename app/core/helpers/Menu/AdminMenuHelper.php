@@ -67,7 +67,9 @@ class AdminMenuHelper implements MenuHelperInterface
                 [
                     'label' => 'Виджеты',
                     'icon' => 'tv',
-                    'items' => [                        
+                    'items' => [ 
+                        ['label' => 'Управление виджетами', 'icon' => 'cog', 'url' => ['/adminka/widgets/settings'],],
+                        ['label' => 'Карусель на главной', 'icon' => 'picture-o', 'url' => ['/adminka/widgets/carousel'],],
                     ]
                 ],                
             ]
