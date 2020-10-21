@@ -1,4 +1,6 @@
 <?php
+
+use app\core\components\url\AlbumsRule;
 use app\core\components\url\KinozalRule;
 
 return [    
@@ -21,6 +23,7 @@ return [
         'kinozal/categories' => 'kinozal/categories',
         '<media:(gallery|trailers)>/<action:(upload|delete)>/<modelId:\d+>' => '<media>/<action>',
         ['class' => KinozalRule::class],
+        ['class' => AlbumsRule::class],
         
     ],
 ];
