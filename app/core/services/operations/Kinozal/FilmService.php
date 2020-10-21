@@ -41,6 +41,13 @@ class FilmService
      */
     protected $filmPersonOccupationService;
 
+    /**
+     * 
+     * @param MediaRepository $mediaRepository
+     * @param FilmRepository $films
+     * @param GenreService $genreService
+     * @param FilmPersonOccupationService $filmPersonOccupationService
+     */
     public function __construct(
             MediaRepository $mediaRepository, 
             FilmRepository $films,
@@ -54,6 +61,11 @@ class FilmService
         $this->filmPersonOccupationService = $filmPersonOccupationService;
     }
     
+    /**
+     * 
+     * @param FilmCreateForm $form
+     * @return type
+     */
     public function create(FilmCreateForm $form)
     {
         $film = Film::create(
@@ -61,9 +73,9 @@ class FilmService
                 $form->code, 
                 $form->previewText,
                 $form->detailText,
+                $form->media,
                 $form->category,
                 $form->country,
-                $form->media,
                 $form->year,
                 $form->time,
                 $form->rating,                
@@ -96,9 +108,9 @@ class FilmService
                 $form->code, 
                 $form->previewText,  
                 $form->detailText,
+                $form->media,
                 $form->category,
                 $form->country,
-                $form->media,
                 $form->year,
                 $form->time,
                 $form->rating,

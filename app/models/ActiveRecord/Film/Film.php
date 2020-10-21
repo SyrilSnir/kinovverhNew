@@ -98,13 +98,13 @@ class Film extends ActiveRecord
         $anonsImagePath = Yii::getAlias('@filmsAnonsImagePath');
         $detailImagePath = Yii::getAlias('@filmsDetailImagePath');
         $kinopanoramaMediaPath = Yii::getAlias('@filmsKinopanoramaMediaPath'); 
-        $this->attachBehavior('imageUploadBehavior', [
+        $this->attachBehavior('anonsImageUploadBehavior', [
             'class' => FileUploadBehavior::class,
             'attribute' => 'anonsImageFile',
             'filePath' => $anonsImagePath . DIRECTORY_SEPARATOR . '[[pk]]-anons.[[extension]]',
             'fileUrl' => '@filmsAnonsImageUrl/[[pk]]-anons.[[extension]]'                     
         ]);
-        $this->attachBehavior('imageUploadBehavior', [
+        $this->attachBehavior('detailImageUploadBehavior', [
             'class' => FileUploadBehavior::class,
             'attribute' => 'detailImageFile',
             'filePath' => $detailImagePath . DIRECTORY_SEPARATOR . '[[pk]]-detail.[[extension]]',
@@ -118,6 +118,21 @@ class Film extends ActiveRecord
         ]);
     }
     
+    /**
+     * 
+     * @param type $name
+     * @param type $code
+     * @param type $previewText
+     * @param type $detailText
+     * @param type $mediaId
+     * @param type $categoryId
+     * @param type $countryId
+     * @param type $year
+     * @param type $time
+     * @param type $rating
+     * @param type $kinopanoramaActive
+     * @return \self
+     */
     public static function create(
             $name,
             $code,
@@ -162,6 +177,20 @@ class Film extends ActiveRecord
         $this->kinopanoramaFile = $file;
     }
 
+    /**
+     * 
+     * @param type $name
+     * @param type $code
+     * @param type $previewText
+     * @param type $detailText
+     * @param type $categoryId
+     * @param type $countryId
+     * @param type $mediaId
+     * @param type $year
+     * @param type $time
+     * @param type $rating
+     * @param type $kinopanoramaActive
+     */
     public function edit (
             $name,
             $code,

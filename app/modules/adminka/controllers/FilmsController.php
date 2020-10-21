@@ -66,8 +66,8 @@ class FilmsController extends BaseAdminController
         $form = new FilmCreateForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $genre = $this->service->create($form);
-                return $this->redirect(['view', 'id' => $genre->id]);
+                $film = $this->service->create($form);
+                return $this->redirect(['view', 'id' => $film->id]);
             } catch (\DomainException $e) {
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
