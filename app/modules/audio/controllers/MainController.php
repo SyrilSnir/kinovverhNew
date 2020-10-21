@@ -2,6 +2,7 @@
 
 namespace app\modules\audio\controllers;
 
+use app\core\repositories\readModels\Audio\AlbumReadRepository;
 use yii\web\Controller;
 /**
  * Description of IndexController
@@ -10,8 +11,27 @@ use yii\web\Controller;
  */
 class MainController extends Controller
 {
+    /**
+     *
+     * @var AlbumReadRepository
+     */
+    private $albums;
+
+    public function __construct(
+            $id, 
+            $module, 
+            AlbumReadRepository $albums,
+            $config = array()
+            )
+    {
+        parent::__construct($id, $module, $config);
+        $this->albums = $albums;
+    }
     public function actionIndex() 
     {
-        return $this->render('index');
+        $albumsProvider = $this->albums->getAll();
+        return $this->render('index',[
+            'albums' => $albumsProvider
+        ]);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace app\core\services\operations\Audio;
 
-use app\models\Forms\Manage\Audio\AlbumForm;
-use app\models\ActiveRecord\Audio\Album;
 use app\core\repositories\Audio\AlbumRepository;
+use app\models\ActiveRecord\Audio\Album;
 use app\models\ActiveRecord\Audio\AlbumGenre;
-use app\core\services\operations\Audio\GenreService;
+use app\models\ActiveRecord\Audio\AlbumSinger;
+use app\models\Forms\Manage\Audio\AlbumForm;
 
 /**
  * Description of AlbumService
@@ -27,14 +27,22 @@ class AlbumService
      * @var GenreService
      */
     protected $genreService;
+    
+    /**
+     *
+     * @var SingerService
+     */
+    protected $singerService;
 
     public function __construct(
         AlbumRepository $albumRepository,
-        GenreService $genreService
+        GenreService $genreService,
+        SingerService $singerService
             )
     {
         $this->albums = $albumRepository;
         $this->genreService = $genreService;
+        $this->singerService = $singerService;
     }
 
     public function create(AlbumForm $form)
@@ -54,7 +62,7 @@ class AlbumService
           $album->image_path = $album->getUploadedFilePath('image');
           $this->albums->save($album);
         }
-        $this->savePostProcess($album, $form);
+        $this->savePostProcess($album, $form);        
         return $album;                           
     }
     
@@ -84,11 +92,9 @@ class AlbumService
     } 
     
     protected function savePostProcess(Album $album, AlbumForm $form)
-    {
-        if (empty($form->genreList)) {
-            $form->genreList = [];
-        }
+    {       
         $this->setGenres($album->id, $form->genreList);
+        $this->setSingers($album->id, $form->singersList);
     }
     
     protected function setGenres(int $albumId, array $genreList) 
@@ -101,4 +107,15 @@ class AlbumService
         }
         return $this;
     }
+    
+    protected function setSingers(int $albumId, array $singersList) 
+    {
+        $this->singerService->clearSingersForAlbum($albumId);
+        foreach ($singersList as $singerId)
+        {
+            $model = AlbumSinger::create($albumId, $singerId);
+            $model->save();
+        }
+        return $this;
+    }    
 }

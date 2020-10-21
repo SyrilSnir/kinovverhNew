@@ -2,9 +2,10 @@
 
 namespace app\models\Forms\Manage\Audio;
 
-use yii\base\Model;
+use app\core\traits\Lists\PersonListTrait;
 use app\models\ActiveRecord\Audio\Album;
 use app\models\ActiveRecord\Audio\Genre;
+use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 
@@ -15,6 +16,8 @@ use yii\web\UploadedFile;
  */
 class AlbumForm extends Model
 {
+    use PersonListTrait;
+    
     public $name;
     public $year;
     public $code;
@@ -25,8 +28,14 @@ class AlbumForm extends Model
      */
     public $genreList;
     
-    public $imageFile;
-    
+    /**
+     *
+     * @var array
+     */
+    public $singersList;
+
+
+    public $imageFile;        
     
     public function __construct(Album $album = null, $config = [])
     {
@@ -37,6 +46,7 @@ class AlbumForm extends Model
             $this->description = $album->description;
             $this->imageFile = $album->image_url;
             $this->genreList = $album->genres;
+            $this->singersList = $album->singersList;
         }
         parent::__construct($config);
     }
@@ -49,6 +59,7 @@ class AlbumForm extends Model
             [['year'],'integer'],
             [['imageFile'], 'image'],
             [['genreList'],'default', 'value' => []],
+            [['singersList'],'default', 'value' => []],
         ];
     }
     
@@ -59,7 +70,9 @@ class AlbumForm extends Model
             'code' => 'Символьный код',
             'description' => 'Текстовое описание',
             'year' => 'Год издания',
-            'imageFile' => 'Изображение'
+            'imageFile' => 'Изображение',
+            'genreList' => 'Жанр(ы)',
+            'singersList' => 'Исполнитель/исполнители'
         ];
     }
 

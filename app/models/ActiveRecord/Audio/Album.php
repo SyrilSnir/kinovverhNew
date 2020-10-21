@@ -2,13 +2,14 @@
 
 namespace app\models\ActiveRecord\Audio;
 
-use yii\db\ActiveRecord;
-use app\models\TimestampTrait;
-use app\models\ActiveRecord\Audio\Track;
 use app\core\tools\Strings;
-use yiidreamteam\upload\FileUploadBehavior;
-use yii\web\UploadedFile;
+use app\models\ActiveRecord\Audio\Track;
+use app\models\ActiveRecord\Person;
+use app\models\TimestampTrait;
 use Yii;
+use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
+use yiidreamteam\upload\FileUploadBehavior;
 
 /**
  * Description of Album
@@ -20,10 +21,13 @@ use Yii;
  * @property string|UploadedFile $image
  * @property string $image_path
  * @property string $image_url
+ * @property string $url
  * @property integer $created_by
  * @property integer $created_at
  * @property integer $updated_at
  * @property Genre[] $genres
+ * @property string $singers
+ * @property Person[] $singersList
  * @property integer $active
  * @author kotov
  */
@@ -104,10 +108,37 @@ use TimestampTrait;
                 ->viaTable($junctionTableName, ['album_id' => 'id']);
     }
     
+    public function getSingers():string
+    {
+        return trim(implode(',', $this->singersArray()),',');
+    }
+
+
+    public function getSingersList() 
+    {
+        $junctionTableName = AlbumSinger::tableName();
+        return $this->hasMany(Person::class, ['id' => 'person_id'])
+                ->viaTable($junctionTableName, ['album_id' => 'id']);
+    }
+
     public function getTracks()
     {
         $this->hasMany(Track::class, ['alnum_id' => 'id'])
                 ->all();
     }
     
+    public function getUrl():string
+    {
+        return "/albums/{$this->code}/listen/";
+    }
+    
+    private function singersArray():array
+    {
+        $singers = [];
+        foreach ($this->singersList as $singer)
+        {
+            $singers[] = $singer->name;
+        }
+        return $singers;
+    }
 }
