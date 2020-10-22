@@ -32,7 +32,15 @@ if (!$model->imageFile) {
          <?php echo $form->field($model, 'code')->textInput()?>
          <?php echo $form->field($model, 'description')->textInput()?>
          <?php echo $form->field($model, 'year')->textInput()?>
-         <?php  echo $form->field($model, 'genreList')->widget(MultiSelectListBox::className(),[
+         <?php  echo $form->field($model, 'singersList')->widget(MultiSelectListBox::class,[
+            'data' => $model->getPersons(),
+            'options' => [
+                'multiple'=>"multiple"
+            ],
+            'clientOptions' => [
+            ]
+        ])  ?>            
+         <?php  echo $form->field($model, 'genreList')->widget(MultiSelectListBox::class,[
             'data' => $model->getGenres(),
             'options' => [
                 'multiple'=>"multiple"

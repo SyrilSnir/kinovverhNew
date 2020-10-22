@@ -2,6 +2,8 @@
 
 namespace app\models\ActiveRecord\Audio;
 
+use app\models\ActiveRecord\Media\AudioContent;
+use app\models\ActiveRecord\Media\Media;
 use yii\db\ActiveRecord;
 
 /**
@@ -12,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property integer $year
  * @property integer $album_id
  * @property integer $media_id
+ * @property Media $media
  * @property string $name
  * @property string $time
  * @author kotov
@@ -48,6 +51,11 @@ class Track extends ActiveRecord
         $this->name = $name;
         $this->track_num = $trackNumber;
         $this->media_id = $mediaId;
+    }
+    
+    public function getMedia()
+    {
+        return $this->hasOne(AudioContent::class, ['id' => 'media_id']);
     }
     
 }

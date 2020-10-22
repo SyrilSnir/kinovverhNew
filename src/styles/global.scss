@@ -9,6 +9,7 @@
 @import "includes/categories.scss"; // вывод категорий фильмов
 @import "includes/comments.scss"; // комментарии
 @import "includes/film-view.scss"; // смотреть фильм
+@import "includes/audio.scss"; //  музыкальный раздел
 @import "includes/modals.scss";
 @import "includes/static-page.scss";
 
@@ -48,6 +49,7 @@ section {
 }
 .img-responsive {
     width: 100%;
+    border-radius: 10px;
 }
 
 

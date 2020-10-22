@@ -1,0 +1,85 @@
+.track-list {
+	font-size: 15px;
+	line-height: 18px;
+	margin-bottom: 24px;
+	text-align: left;
+	width: 100%; 
+}
+.track-list .action {
+	width: 10em;
+}
+/* стили плейера */
+.kv-track {
+	position: relative;
+	padding-bottom: 10px;
+}
+.kv-track .fa {
+	color: #FFCC00;
+	cursor: pointer;
+	font-size: 22px;
+	line-height: 0;
+}
+
+.kv-track-list-wrapper {
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    width: 700px;
+    margin: 2em auto;
+    padding: 1em;
+}
+
+.kv-track {
+	font-size: 16px;
+}
+.kv-track .jp-progress {
+    background-color: #FFCC00;
+    border-radius: 4px;
+    overflow: hidden;
+    left: 22px;
+    top: 18px;
+    width: 600px;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2) inset;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2) inset;
+	cursor: pointer;
+}
+.kv-track .jp-play-bar {
+    height: 6px;
+    background-color: #f4ebc3;
+    border-radius: 4px;	
+}
+.kv-player-elements {
+	position: absolute;
+}
+.jp-current-time {
+	right:50px;
+	bottom: -1em;
+	font-weight: bold;
+	font-size: 10px;
+	color: #FFCC00;
+}
+.jp-duration {
+	right: 50px;
+	top: -2px;
+}
+.kv-player-elements.jp-volume-bar {
+    right: 0;
+    top: 1em;
+    width: 35px;
+    height: 8px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1) inset;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1) inset;
+    background-color: #FFCC00;
+    overflow: hidden;
+	
+}
+.kv-player-elements .jp-volume-bar-value {
+    background-color: #f4ebc3;
+    height: 8px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.kv-player-elements.fa-volume-up {
+    right: 0;
+    top: 0.9em;
+    font-size: 12px;
+}
