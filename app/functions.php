@@ -27,10 +27,3 @@ if (!function_exists('mb_str_split')) {
     }
 }
 
-if (!function_exists('mb_uppercase')) {
-    function mb_uppercase(string $string):string
-    {
-        return mb_convert_case($string, MB_CASE_UPPER, "UTF-8");
-    }
-}
-

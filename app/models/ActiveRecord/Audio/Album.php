@@ -3,13 +3,13 @@
 namespace app\models\ActiveRecord\Audio;
 
 use app\core\tools\Strings;
-use app\models\ActiveRecord\Audio\Track;
 use app\models\ActiveRecord\Person;
 use app\models\TimestampTrait;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
 use yiidreamteam\upload\FileUploadBehavior;
+use app\models\ActiveRecord\Audio\Track;
 
 /**
  * Description of Album
@@ -28,6 +28,7 @@ use yiidreamteam\upload\FileUploadBehavior;
  * @property Genre[] $genres
  * @property string $singers
  * @property Person[] $singersList
+ * @property Track[] $tracks
  * @property integer $active
  * @author kotov
  */
@@ -123,7 +124,7 @@ use TimestampTrait;
 
     public function getTracks()
     {
-        $this->hasMany(Track::class, ['alnum_id' => 'id'])
+        return $this->hasMany(Track::class, ['album_id' => 'id'])
                 ->all();
     }
     

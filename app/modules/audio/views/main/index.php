@@ -7,7 +7,7 @@ use yii\widgets\ListView;
 /** @var View $this */
 /** @var ActiveDataProvider $albums */
 
-$title = mb_uppercase('Альбомы');
+$title = mb_strtoupper('Альбомы');
 $this->title = $title;
 //dump($albums);
 ?>
