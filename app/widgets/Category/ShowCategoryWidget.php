@@ -41,7 +41,7 @@ class ShowCategoryWidget extends Widget
                 $this->category
                 );
         
-        return $this->render('category', [
+        return $this->render('category', [            
             'filmLists' => $filmsManager->getList()
         ]);
     }

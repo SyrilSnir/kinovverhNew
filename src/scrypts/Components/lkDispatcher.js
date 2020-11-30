@@ -13,7 +13,14 @@ class LkDispatcher {
         );  
         $(".lk-form .input-group-addon").on("click",".glyphicon-remove-sign",
             this._cancel.bind(this)
-        );  
+        );
+        $('.lk-menu-item a').click(function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+        $('#pop-favorite-remove').on('shown.bs.modal', function (e) {
+            $(e.relatedTarget).parents('.pop-film').fadeOut().remove();
+        });        
     }
     _editData(e) {
         let $target = $(e.currentTarget);

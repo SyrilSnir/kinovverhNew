@@ -2,23 +2,26 @@
 
 namespace app\models\ActiveRecord\Film;
 
-use yii\db\ActiveRecord;
 use app\core\tools\Strings;
-use app\models\TimestampTrait;
-use app\models\ActiveRecord\Film\Znak;
 use app\models\ActiveRecord\Country;
-use app\models\ActiveRecord\Person;
-use app\models\ActiveRecord\Media\Gallery;
-use app\models\ActiveRecord\Media\Trailers;
-use app\models\ActiveRecord\Film\FilmGenre;
-use app\models\ActiveRecord\Occupation;
-use app\models\ActiveRecord\Person\FilmPersonOccupation;
 use app\models\ActiveRecord\Film\FilmComment;
-use app\models\ActiveRecord\Media\VideoContent;
-use yiidreamteam\upload\FileUploadBehavior;
-use yii\web\UploadedFile;
+use app\models\ActiveRecord\Film\FilmGenre;
+use app\models\ActiveRecord\Film\Znak;
+use app\models\ActiveRecord\Media\Gallery;
 use app\models\ActiveRecord\Media\Media;
+use app\models\ActiveRecord\Media\Trailers;
+use app\models\ActiveRecord\Media\VideoContent;
+use app\models\ActiveRecord\Occupation;
+use app\models\ActiveRecord\Person;
+use app\models\ActiveRecord\Person\FilmPersonOccupation;
+use app\models\ActiveRecord\User;
+use app\models\TimestampTrait;
+use InvalidArgumentException;
 use Yii;
+use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
+use yiidreamteam\upload\FileUploadBehavior;
+use yiidreamteam\upload\ImageUploadBehavior;
 
 /**
  * Информация о звгруженных фильмах
@@ -336,7 +339,7 @@ class Film extends ActiveRecord
         try {
             $this->_imagesCache = \GuzzleHttp\json_decode($this->images, true);
             return $this->_imagesCache;
-        } catch ( \InvalidArgumentException $e) {
+        } catch ( InvalidArgumentException $e) {
             return [];            
         }  
     }
@@ -358,5 +361,13 @@ class Film extends ActiveRecord
     public function getUrl():string
     {
         return '/kinozal/' . $this->code . '/view';
+    }
+    
+    public function inFavorites(int $userId):bool
+    {
+        return !!Favorites::findOne([
+            'film_id' => $this->id,
+            'user_id' => $userId
+        ]);
     }
 }
