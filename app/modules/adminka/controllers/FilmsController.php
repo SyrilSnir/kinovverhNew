@@ -33,7 +33,7 @@ class FilmsController extends BaseAdminController
             $module, 
             FilmRepository $repository,
             FilmService $service,
-            $config = array())
+            $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->repository = $repository;

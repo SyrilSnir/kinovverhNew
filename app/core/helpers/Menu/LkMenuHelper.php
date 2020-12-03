@@ -13,8 +13,10 @@ class LkMenuHelper implements MenuHelperInterface
     public static function getMenu($params = []): array
     { 
         return [
-            ['label' => 'Главная', 'url' => ['#home']],
-       //     ['template' => self::getRightNavbarTemplate()]
+            ['label' => 'Главная', 'url' => '#home'],
+            ['label' => 'Избранное', 'url' => '#favorites'],
+            ['label' => 'Мои покупки', 'url' => '#buy'],
+            ['template' => self::getRightNavbarTemplate()]
         ];
     }
     

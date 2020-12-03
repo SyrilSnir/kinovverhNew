@@ -1,13 +1,15 @@
-<?php 
+<?php
 
+use app\assets\MainAsset;
+use app\assets\YiiAsset;
+use app\core\helpers\Menu\NavMenuHelper;
 use app\widgets\Auth\LoginFormWidget;
 use app\widgets\Auth\RegisterFormWidget;
-use yii\helpers\Html;
-use app\assets\YiiAsset;
-use app\assets\MainAsset;
-use app\core\helpers\Menu\NavMenuHelper;
-use yii\bootstrap\NavBar;
+use app\widgets\Modal\RemoveFromFavoritesWidget;
+use app\widgets\Modal\ToFavoritesWidget;
 use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\helpers\Html;
 
 YiiAsset::register($this);
 MainAsset::register($this);
@@ -20,7 +22,7 @@ $registerFormModel = null;
 $menu = NavMenuHelper::getMenu();
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo \Yii::$app->language?>">
+<html lang="<?php echo Yii::$app->language?>">
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="Content-Type" content="text/html; charset=<?= Yii::$app->charset ?>" />
@@ -144,6 +146,14 @@ $menu = NavMenuHelper::getMenu();
     echo LoginFormWidget::widget(['model' => $loginFormModel]);
     echo RegisterFormWidget::widget(['model' => $registerFormModel]);
 ?>
+
+<?php else: ?>
+
+<?php 
+    echo ToFavoritesWidget::widget();
+    echo RemoveFromFavoritesWidget::widget();
+?>
+
 <?php endif; ?>
 <?php $this->endBody() ?> 
     <?php

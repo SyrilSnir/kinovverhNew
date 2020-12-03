@@ -3,6 +3,7 @@
 use app\assets\YiiAsset;
 use app\core\manage\auth\UserIdentity;
 use app\modules\adminka\Module as Adminka;
+use app\modules\api\ApiModule;
 use app\modules\audio\AudioModule;
 use app\modules\kinozal\KinozalModule;
 use dosamigos\fileupload\FileUploadUIAsset;
@@ -159,7 +160,12 @@ $params = require_once __DIR__ . '/params.php';
                 'class' => Adminka::class,
                 'layout' => 'main',
                 'defaultRoute' => 'main/index',                
-            ]            
+            ],
+            'api' => [
+                'class' => ApiModule::class,
+                'layout' => false,
+                'defaultRoute' => 'main/index',                
+            ],            
         ], 
         'params' => $params,
     ];

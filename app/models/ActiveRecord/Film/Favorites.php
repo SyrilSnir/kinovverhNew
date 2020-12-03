@@ -17,4 +17,30 @@ class Favorites extends ActiveRecord
     {
         return '{{%favorites_films}}';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['user_id', 'film_id'], 'required'],
+            [['user_id', 'film_id'], 'integer'],
+            [['user_id', 'film_id'], 'unique', 'targetAttribute' => ['user_id', 'film_id']],
+        ];
+    }  
+    
+    /**
+     * 
+     * @param int $userId
+     * @param int $filmId
+     * @return \self
+     */
+    public static function create(int $userId, int $filmId):self
+    {
+        $model = new self();
+        $model->user_id = $userId;
+        $model->film_id = $filmId;
+        return $model;
+    }
 }

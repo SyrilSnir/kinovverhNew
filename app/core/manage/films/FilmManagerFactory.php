@@ -2,12 +2,14 @@
 
 namespace app\core\manage\films;
 
+use app\core\filters\films\CategoryList;
+use app\core\filters\films\FavoriteFilms;
 use app\core\filters\films\FilmByGenreList;
 use app\core\filters\films\PopularFilmsList;
-use app\core\filters\films\CategoryList;
-use app\models\ActiveRecord\Film\Category;
-use app\core\repositories\Films\FilmRepository;
 use app\core\manage\films\FilmManager;
+use app\core\repositories\Films\FilmRepository;
+use app\models\ActiveRecord\Film\Category;
+use app\models\ActiveRecord\User;
 
 /**
  * Description of FilmManagerFactory
@@ -46,4 +48,16 @@ class FilmManagerFactory
         return new FilmManager($filmsFilter);
     }
     
+    /**
+     * Получить избранные фильмы для пользователя
+     * @param FilmRepository $repositiry
+     * @param User $user
+     * @return FilmManager
+     */
+    public static function getFavoritesFilmManager(FilmRepository $repository, User $user)
+    {
+        $filmsFilter = new FavoriteFilms($repository, $user);
+        return new FilmManager($filmsFilter);
+                
+    }
 }
