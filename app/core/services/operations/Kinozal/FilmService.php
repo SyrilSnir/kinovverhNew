@@ -2,19 +2,21 @@
 
 namespace app\core\services\operations\Kinozal;
 
+use app\core\repositories\Films\FavoriteFilmsRepository;
 use app\core\repositories\Films\FilmRepository;
 use app\core\repositories\Media\MediaRepository;
-use app\models\Forms\Manage\Films\FilmEditForm;
-use app\models\Forms\Manage\Films\FilmCreateForm;
-use app\models\Forms\Manage\Films\FilmForm;
+use app\core\services\operations\Kinozal\GenreService;
+use app\core\services\operations\Person\FilmPersonOccupationService;
+use app\models\ActiveRecord\Film\Favorites;
 use app\models\ActiveRecord\Film\Film;
 use app\models\ActiveRecord\Film\FilmGenre;
-use app\models\ActiveRecord\Person\FilmPersonOccupation;
-use app\models\ActiveRecord\Occupation;
 use app\models\ActiveRecord\Media\Media;
 use app\models\ActiveRecord\Media\MediaCategory;
-use app\core\services\operations\Person\FilmPersonOccupationService;
-use app\core\services\operations\Kinozal\GenreService;
+use app\models\ActiveRecord\Occupation;
+use app\models\ActiveRecord\Person\FilmPersonOccupation;
+use app\models\Forms\Manage\Films\FilmCreateForm;
+use app\models\Forms\Manage\Films\FilmEditForm;
+use app\models\Forms\Manage\Films\FilmForm;
 use yii\web\UploadedFile;
 
 /**
@@ -25,17 +27,25 @@ use yii\web\UploadedFile;
 class FilmService
 {
     /**    
-     * @var FilmRepository $films
+     * @var FilmRepository
      */
     protected $films;
-    /**    
-     * @var MediaRepository $mediaRepository
+    
+    /**
+     * @var FavoriteFilmsRepository 
      */
-    protected $mediaRepository;    
+    protected $favoriteFilms;
+    
+    /**    
+     * @var MediaRepository
+     */
+    protected $mediaRepository;
+    
     /**    
      * @var GenreService $genreService
      */
-    protected $genreService;        
+    protected $genreService;
+    
     /**     
      * @var FilmPersonOccupationService 
      */
@@ -51,12 +61,14 @@ class FilmService
     public function __construct(
             MediaRepository $mediaRepository, 
             FilmRepository $films,
+            FavoriteFilmsRepository $favoriteFilms,
             GenreService $genreService,
             FilmPersonOccupationService $filmPersonOccupationService
             )
     {
         $this->films = $films; 
         $this->mediaRepository = $mediaRepository;
+        $this->favoriteFilms = $favoriteFilms;
         $this->genreService = $genreService;
         $this->filmPersonOccupationService = $filmPersonOccupationService;
     }
@@ -133,12 +145,39 @@ class FilmService
         $this->savePostProcess($film, $form);        
     }
     
-    public function remove($id)
+    public function remove($id): void
     {
         /* @var $film Film */
         $film = $this->films->findById($id);
         $this->films->remove($film);
     }        
+
+    /**
+     * Добавить фильм в избранное
+     * @param int $filmId ID фильма
+     * @param int $userId ID пользователя
+     * @return void
+     */
+    public function toFavorites(int $filmId, int $userId): void
+    {
+        $element = Favorites::findOne([
+            'film_id' => $filmId,
+            'user_id' => $userId
+        ]);
+        if (!$element) {
+            $favoriteFilm = Favorites::create($userId, $filmId);
+            $this->favoriteFilms->save($favoriteFilm);
+        }
+    }
+    
+    public function removeFromFavorites(int $filmId, int $userId):void
+    {
+        $element = $this->favoriteFilms->getField($filmId, $userId);
+        if ($element) {
+            $this->favoriteFilms->remove($element);
+        }
+    }
+
 
     protected function setKinopanoramaMediaField(Film $film, UploadedFile $mediaFile) 
     {

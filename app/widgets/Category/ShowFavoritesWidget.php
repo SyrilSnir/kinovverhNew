@@ -4,21 +4,21 @@ namespace app\widgets\Category;
 
 use app\core\manage\films\FilmManagerFactory;
 use app\core\repositories\Films\FilmRepository;
+use Yii;
 use yii\base\Widget;
 
-
 /**
- * Description of ShowPopularWidget
+ * Description of ShowFavoritesWidget
  *
  * @author kotov
  */
-class ShowPopularWidget extends Widget
+class ShowFavoritesWidget extends Widget
 {
     /**
      *
      * @var FilmRepository 
      */    
-    public $filmRepository;
+    public $filmRepository;        
 
 
     public function __construct( 
@@ -30,10 +30,12 @@ class ShowPopularWidget extends Widget
     }
     public function run() 
     {
-        $filmsManager = FilmManagerFactory::getPopularFilmManager($this->filmRepository);
+        $user = Yii::$app->user->getIdentity()->user;
+        $filmsManager = FilmManagerFactory::getFavoritesFilmManager($this->filmRepository, $user);
         
         return $this->render('show',[
             'view' => 'category',
+            'page' => 'favorites',
             'filmLists' => $filmsManager->getList()
         ]);
     }

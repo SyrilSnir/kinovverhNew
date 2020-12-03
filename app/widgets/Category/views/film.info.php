@@ -1,3 +1,10 @@
+<?php 
+
+/** @var Film $film */
+/** @var bool $favorites */
+/** @var ?int $userId */
+use app\models\ActiveRecord\Film\Film;
+?>
 <div class="pop-film">
     <div class="pop-film__wrapp">
         <a class="pop-film__play" href="/kinozal/<?php echo $film->code. '/view/'?>"></a>
@@ -7,7 +14,12 @@
             <div class="pop-film__data-wrap">
                 <p>
                     <a href="/kinozal/<?php echo $film->code ?>" class="btn btn-xs">Смотреть</a>
-                    <a href="#pop-enter" class="btn btn-xs" data-toggle="modal" data-id="<?php echo $film->id ?>">Смотреть позже</a>
+                        <?php 
+                            $modal = !empty($userId) ? 'pop-favorite': 'pop-enter';
+                        ?>
+                    <a href="#<?php echo $modal ?>" class="btn in-favorite btn-xs<?php if ($favorites): ?> hide<?php endif; ?>" data-toggle="modal" data-id="<?php echo $film->id ?>">Смотреть позже</a>
+                    <a href="#pop-favorite-remove" class="btn del-favorite btn-xs<?php if (!$favorites): ?> hide<?php endif; ?>" data-toggle="modal" data-id="<?php echo $film->id ?>">Удалить из избранного</a>
+
                 </p>
                 <p><span>Год выпуска:</span> <?php echo $film->year ?></p>
             <?php if (count($film->editors) > 0): ?>

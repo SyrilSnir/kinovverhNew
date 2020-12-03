@@ -72,5 +72,10 @@ class UserIdentity extends Model implements IdentityInterface
     {
         return $this->user->birthday;
     }
+    
+    public function getUser()
+    {
+        return $this->user;
+    }    
 
 }

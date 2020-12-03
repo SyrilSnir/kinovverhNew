@@ -2,9 +2,11 @@
 
 namespace app\models\ActiveRecord;
 
+use app\models\ActiveRecord\Film\Favorites;
+use app\models\ActiveRecord\Film\Film;
 use app\models\TimestampTrait;
-use yii\db\ActiveRecord;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * User model
@@ -74,4 +76,11 @@ class User extends ActiveRecord
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
+    
+    public function getFavorites()
+    {
+        $junctionTableName = Favorites::tableName();
+        return $this->hasMany(Film::class, ['id' => 'film_id'])
+                ->viaTable($junctionTableName, ['user_id' => 'id']);
+    }    
 }
