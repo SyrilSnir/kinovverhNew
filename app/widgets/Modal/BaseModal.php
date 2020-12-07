@@ -44,16 +44,16 @@ class BaseModal extends Widget
                 var filmId = targetButton.data('id');
                 console.log(filmId);
                 $.ajax ({ 
-                    url: '/api/film/$this->apiMethod',
+                    url: '/api/film/{$this->apiMethod}',
                     dataType: 'json',
                     type: 'POST',
                     data: {
                         'filmId' : filmId,
                     },
                     success: function(response) {
-                        $('#$this->modalId .favorite-content').html(response.message);
+                        $('#{$this->modalId} .favorite-content').html(response.message);
                         targetButton.addClass('hide');
-                        targetButton.siblings('.$this->oppositeButtonClass').removeClass('hide');
+                        targetButton.siblings('.{$this->oppositeButtonClass}').removeClass('hide');
                     }
                 });
             });
