@@ -17,3 +17,19 @@
         top: 4px;
     }
 }
+.film_code__button, .pop-button {
+    width: 216px;
+    padding: 8px 0;
+    text-align: center;
+    border-radius: 23px;
+    border: none;
+    background: #ffcc00;
+    font-size: 18px;
+    font-family: 'pt_sansbold';
+    box-shadow: 0 4px 0 #977000;
+    display: inline-block;
+    color: #34303f;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    cursor: pointer;
+}
