@@ -38,7 +38,7 @@ class BaseModal extends Widget
     private function registerScripts()
     {
         $script = <<<JS
-            $('#$this->modalId').on('show.bs.modal', function (e) {
+            $('#{$this->modalId}').on('show.bs.modal', function (e) {
                 console.log('load favorites widget');
                 var targetButton = $(e.relatedTarget);
                 var filmId = targetButton.data('id');
@@ -56,9 +56,9 @@ class BaseModal extends Widget
                         targetButton.siblings('.{$this->oppositeButtonClass}').removeClass('hide');
                     }
                 });
-            });
-            
-JS;                
+            });            
+JS;
         $this->view->registerJs($script, \yii\web\View::POS_READY);
     }
 }
+?>
