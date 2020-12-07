@@ -143,7 +143,15 @@ $params = require_once __DIR__ . '/params.php';
             'cache' => [
                 'class' => FileCache::class,
                 'defaultDuration' => 86400
-            ],            
+            ], 
+            'robokassa' => [
+                'class' => '\robokassa\Merchant',
+                'baseUrl' => 'https://auth.robokassa.ru/Merchant/Index.aspx',
+                'sMerchantLogin' => 'vverhtest',
+                'sMerchantPass1' => 'B1bzWrJ29Z98ogFZiGGI',
+                'sMerchantPass2' => 'pJLMuMxSY82m96PYT4sv',
+                'isTest' => true,
+            ]            
         ],
         'modules' => [   
             'kinozal' => [

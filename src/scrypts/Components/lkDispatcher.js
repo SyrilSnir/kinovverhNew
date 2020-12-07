@@ -20,7 +20,7 @@ class LkDispatcher {
         });
         $('#pop-favorite-remove').on('shown.bs.modal', function (e) {
             $(e.relatedTarget).parents('.pop-film').fadeOut().remove();
-        });        
+        });              
     }
     _editData(e) {
         let $target = $(e.currentTarget);

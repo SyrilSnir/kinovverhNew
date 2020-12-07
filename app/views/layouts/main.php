@@ -152,6 +152,7 @@ $menu = NavMenuHelper::getMenu();
 <?php 
     echo ToFavoritesWidget::widget();
     echo RemoveFromFavoritesWidget::widget();
+    echo \app\widgets\Modal\PaymentModalWidget::widget();
 ?>
 
 <?php endif; ?>

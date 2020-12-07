@@ -12,6 +12,12 @@ class AppLoader {
     run() {
    //     this.globalLoader.init();
         this.bxSliderLoader.init();
+        let numberInputs = document.querySelectorAll('.pay-summ');
+        numberInputs.forEach(item => {
+          item.addEventListener('input', () => {
+            item.value = item.value.replace(/\D/,'');            
+          });
+        });
         console.log('Запуск приложения');
     }
 
