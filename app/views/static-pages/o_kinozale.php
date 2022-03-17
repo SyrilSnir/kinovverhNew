@@ -1,4 +1,4 @@
-<div class="page-content">
+<div id="kinozal-about" class="page-content">
  
 <div class="container"> 	 
   <br>

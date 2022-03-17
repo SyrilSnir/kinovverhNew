@@ -1,6 +1,6 @@
 {
-    "name":"syrilsnir/kinovverh",
-    "description": "Онлайн кинозал компании ВВЕРХ",
+    "name": "syrilsnir/kinovverh",
+    "description": "\u041e\u043d\u043b\u0430\u0439\u043d \u043a\u0438\u043d\u043e\u0437\u0430\u043b \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438 \u0412\u0412\u0415\u0420\u0425",
     "version": "0.0.0",
     "type": "project",
     "authors": [
@@ -25,19 +25,24 @@
         "kartik-v/yii2-widget-switchinput": "^1.3",
         "yii-cms/yii2-robokassa": "^1.3"
     },
-    "autoload":{
-        "psr-4": {          
+    "autoload": {
+        "psr-4": {
             "app\\": "app"
         }
     },
     "repositories": {
         "packagist": {
-          "type": "composer",
-          "url": "https://packagist.phpcomposer.com"
-            }
-        },
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    },
     "require-dev": {
         "yiisoft/yii2-gii": "^2.2",
-        "yiisoft/yii2-debug": "^2.1"
+        "yiisoft/yii2-debug": "^2.1",
+        "codeception/codeception": "^4.1",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "codeception/module-asserts": "^1.0.0",
+        "codeception/module-webdriver": "^1.1",
+        "codeception/module-yii2": "^1.1"
     }
 }
