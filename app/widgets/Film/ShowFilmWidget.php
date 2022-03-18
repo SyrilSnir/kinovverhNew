@@ -2,6 +2,7 @@
 
 namespace app\widgets\Film;
 
+use app\models\ActiveRecord\Media\Media;
 use app\models\ActiveRecord\Media\VideoContent;
 use yii\base\Widget;
 
@@ -25,7 +26,7 @@ class ShowFilmWidget extends Widget
         ]);
     }
     
-    public function setMedia(VideoContent $media):void
+    public function setMedia(Media $media):void
     {
         $this->media = $media;
     }
