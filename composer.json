@@ -30,12 +30,6 @@
             "app\\": "app"
         }
     },
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://packagist.phpcomposer.com"
-        }
-    },
     "require-dev": {
         "yiisoft/yii2-gii": "^2.2",
         "yiisoft/yii2-debug": "^2.1",
@@ -44,5 +38,19 @@
         "codeception/module-asserts": "^1.0.0",
         "codeception/module-webdriver": "^1.1",
         "codeception/module-yii2": "^1.1"
-    }
+    },
+    "repositories": [
+      {
+        "type": "composer",
+        "url": "https://asset-packagist.org"
+      }
+    ],
+    "config": {
+        "fxp-asset": {
+          "enabled": false
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }        
+    }  
 }

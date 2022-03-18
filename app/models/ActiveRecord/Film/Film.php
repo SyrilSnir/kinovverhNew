@@ -8,13 +8,13 @@ use app\models\ActiveRecord\Film\FilmComment;
 use app\models\ActiveRecord\Film\FilmGenre;
 use app\models\ActiveRecord\Film\Znak;
 use app\models\ActiveRecord\Media\Gallery;
+use app\models\ActiveRecord\Media\Kinopanorama;
 use app\models\ActiveRecord\Media\Media;
 use app\models\ActiveRecord\Media\Trailers;
 use app\models\ActiveRecord\Media\VideoContent;
 use app\models\ActiveRecord\Occupation;
 use app\models\ActiveRecord\Person;
 use app\models\ActiveRecord\Person\FilmPersonOccupation;
-use app\models\ActiveRecord\User;
 use app\models\TimestampTrait;
 use InvalidArgumentException;
 use Yii;
@@ -44,7 +44,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property UploadedFile $detailImageFile 
  * @property string $detailImage картинка для вывода в детальном показе
  * @property boolean $kinopanorama_active Показать кинопанораму (да/нет)
- * @property Media $kinopanorama Показать кинопанораму (да/нет)
+ * @property Kinopanorama $kinopanorama Показать кинопанораму (да/нет)
  * @property UploadedFile $kinopanoramaFile
  * @property integer $shows
  * @property Genre[] $genres
@@ -182,14 +182,14 @@ class Film extends ActiveRecord
 
     /**
      * 
-     * @param type $name
-     * @param type $code
-     * @param type $previewText
-     * @param type $detailText
-     * @param type $categoryId
-     * @param type $countryId
-     * @param type $mediaId
-     * @param type $year
+     * @param string $name
+     * @param string $code
+     * @param string $previewText
+     * @param string $detailText
+     * @param int $mediaId
+     * @param int $categoryId
+     * @param int $countryId
+     * @param int $year
      * @param type $time
      * @param type $rating
      * @param type $kinopanoramaActive
@@ -199,9 +199,9 @@ class Film extends ActiveRecord
             $code,
             $previewText,
             $detailText,
+            $mediaId,
             $categoryId,
             $countryId,
-            $mediaId,
             $year,
             $time,
             $rating,
@@ -240,7 +240,7 @@ class Film extends ActiveRecord
     
     public function getKinopanorama() 
     {
-        return $this->hasOne(Media::class, ['id' => 'kinopanorama_id']);
+        return $this->hasOne(Kinopanorama::class, ['id' => 'kinopanorama_id']);
     }
 
     public function getCountry()

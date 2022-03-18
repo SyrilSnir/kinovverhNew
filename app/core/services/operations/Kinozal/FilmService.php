@@ -10,8 +10,8 @@ use app\core\services\operations\Person\FilmPersonOccupationService;
 use app\models\ActiveRecord\Film\Favorites;
 use app\models\ActiveRecord\Film\Film;
 use app\models\ActiveRecord\Film\FilmGenre;
+use app\models\ActiveRecord\Media\Kinopanorama;
 use app\models\ActiveRecord\Media\Media;
-use app\models\ActiveRecord\Media\MediaCategory;
 use app\models\ActiveRecord\Occupation;
 use app\models\ActiveRecord\Person\FilmPersonOccupation;
 use app\models\Forms\Manage\Films\FilmCreateForm;
@@ -188,27 +188,15 @@ class FilmService
         $kinopanoramaMediaUrl = $film->getUploadedFileUrl('kinopanoramaFile');
         if ($film->kinopanorama_id) {
             /** @var Media $mediaModel */
-            $mediaModel = $this->mediaRepository->findById($film->kinopanorama_id);
+            $mediaModel = $this->mediaRepository->findKinopanoramaById($film->kinopanorama_id);
             $mediaModel->edit(
-                    $film->kinopanoramaFile,
-                    'Кинопанорама',
-                    $kinopanoramaMediaPath, 
-                    $kinopanoramaMediaUrl, 
-                    $mediaFile->size, 
-                    $mediaFile->type,
-                    $mediaFile->extension,
-                    MediaCategory::CATEGORY_KINOPANORAMA);
+                    basename($kinopanoramaMediaPath),
+                    'Кинопанорама');
             $this->mediaRepository->save($mediaModel);            
         } else {
-            $mediaModel = Media::create(
-                    $film->kinopanoramaFile,
-                    'Кинопанорама',
-                    $kinopanoramaMediaPath,
-                    $kinopanoramaMediaUrl,
-                    $mediaFile->size, 
-                    $mediaFile->type,
-                    $mediaFile->extension,
-                    MediaCategory::CATEGORY_KINOPANORAMA
+            $mediaModel = Kinopanorama::create(
+                    basename($kinopanoramaMediaPath),
+                    'Кинопанорама'
                     );
             $this->mediaRepository->save($mediaModel);
             $film->kinopanorama_id = $mediaModel->id;

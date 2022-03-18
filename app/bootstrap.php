@@ -66,7 +66,7 @@ Yii::setAlias('@mainPageCarouselPath',   dirname(__DIR__)
 Yii::setAlias('@filmsImageUrl', '/files/images/films');
 Yii::setAlias('@filmsAnonsImageUrl', '/files/images/films/anons');
 Yii::setAlias('@filmsDetailImageUrl', '/files/images/films/detail');
-Yii::setAlias('@filmsKinopanoramaUrl', '/files/media/kinopanorama');
+Yii::setAlias('@filmsKinopanoramaMediaUrl', '/files/media/kinopanorama');
 Yii::setAlias('@galleryUrl', '/files/images/gallery');
 Yii::setAlias('@mainPageCarouselUri', '/files/widgets/main-page-carousel/gallery');
 Yii::setAlias('@trailersUrl', '/files/media/trailers');

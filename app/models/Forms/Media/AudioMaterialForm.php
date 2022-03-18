@@ -3,8 +3,8 @@
 namespace app\models\Forms\Media;
 
 use app\core\helpers\Files\FileListHelper;
+use app\models\ActiveRecord\Media\AudioContent;
 use Yii;
-use yii\base\Model;
 use yii\helpers\StringHelper;
 
 /**
@@ -15,7 +15,14 @@ use yii\helpers\StringHelper;
 class AudioMaterialForm extends MediaForm
 {
 
-       
+    public function __construct(AudioContent $model = null, $config = []) {
+        if ($model) {
+            $this->description = $model->description;
+            $this->file = $model->hash;
+        }
+        parent::__construct($config);
+    }            
+
     public function rules(): array 
     {
         return [

@@ -5,12 +5,14 @@ namespace app\models\ActiveRecord\Media;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
+use yii\helpers\StringHelper;
 
 /**
  * Загруженные медиафайлы
  * 
  * @property integer $id
  * @property string $name
+ * @property string $hash
  * @property string $path
  * @property string $description
  * @property string $url
@@ -66,5 +68,10 @@ abstract class Media extends ActiveRecord
     public function getPath():string
     {
         return Yii::getAlias(static::PATH_ALIAS) . DIRECTORY_SEPARATOR . $this->name;
-    }    
+    } 
+    
+    public function getHash():string 
+    {
+        return StringHelper::base64UrlEncode($this->name);
+    }
 }

@@ -2,22 +2,21 @@
 
 namespace app\core\repositories\Media;
 
-use app\models\ActiveRecord\Media\Media;
-use app\core\repositories\RepositoryInterface;
 use app\core\repositories\DataManipulationTrait;
+use app\models\ActiveRecord\Media\Kinopanorama;
 
 /**
  * Description of KinopanoramaMediaRepository
  *
  * @author kotov
  */
-class MediaRepository implements RepositoryInterface
+class MediaRepository
 {
     use DataManipulationTrait;
     
-    public static function findById($id)
+    public static function findKinopanoramaById($id)
     {
-        return Media::find($id)
+        return Kinopanorama::find($id)
             ->andWhere(['id' => $id])
             ->one();
     }
